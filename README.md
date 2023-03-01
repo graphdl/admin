@@ -96,6 +96,16 @@ SalesOrder:
  customerId: Customer
  employeeId: Employee
  shipperId:  Shipper
+ orderDate: datetime
+ freight: currency
+ requiredDate: datetime
+ shippedDate: datetime
+ shipName: string
+ shipAddress: string
+ shipCity: string
+ shipPostalCode: string
+ shipRegion: string
+ shipCountry: string
 
 Shipper:
  _id: entityId
