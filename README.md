@@ -21,6 +21,8 @@ Album:
   _seed:  https://jsonplaceholder.typicode.com/albums
   _id:    id
   _name:  title
+  _detail: 
+    include: [Album.id<-Photo.albumId]
   title:  string
   userId: User.id
   
@@ -28,6 +30,7 @@ Photo:
   _seed:        https://jsonplaceholder.typicode.com/photos
   _id:          id
   _name:        title
+  albumId:      [Album.id]
   title:        string
   url:          imageUrl
   thumbnailUrl: imageUrl
