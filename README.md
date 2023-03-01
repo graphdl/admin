@@ -10,14 +10,18 @@ _defaultId:   entityId
 _constraints: true
 
 Category:
+ _id: entityId
  _name: ${categoryName} - ${description}
+ entityId: int
  categoryName: string
  description: string
  picture: https://img.do/northwind/${categoryName}.jpg
 
 Customer:
+ _id: entityId
  _name: companyName
  _icon: 
+ entityId: int
  companyName: string
  address: string
  city: string
@@ -32,7 +36,9 @@ Customer:
  email: email
  
 Employee:
+ _id: entityId
  _name: ${firstname} ${lastname}, ${title}
+ entityId: int
  titleOfCourtesy: string
  firstname: string
  lastname: string
@@ -53,37 +59,54 @@ Employee:
  notes: richtext
 
 EmployeeTerritory:
+ _id: entityId
  _name: territoryCode
+ entityId: int
  employeeId: Employee
  territoryCode: Territory.territoryCode
  
 OrderDetail:
+ _id: entityId
  _name: ${quantity} ${productId->name}
+ entityId: int
+ entityId: int
  orderId:   Order
  productId: Product
  
 Product:
+ _id: entityId
  _name:      productName
+ entityId: int
  categoryId: Category
  supplierId: Supplier
  
 SalesOrder:
+ _id: entityId
  _name: ${date(orderDate)} - ${count(<-OrderDetail)} Items
+ entityId: int
  customerId: Customer
  employeeId: Employee
  shipperId:  Shipper
 
 Shipper:
+ _id: entityId
  _name: companyName
+ entityId: int
  
 Supplier:
+ _id: entityId
  _name: companyName
+ entityId: int
  
 Region:
+ _id: entityId
  _name: regiondescription
+ entityId: int
  
 Territory:
+ _id: entityId
  regionId: Region
+ entityId: int
 ```
 
 
