@@ -22,8 +22,8 @@ Customer:
  address: string
  city: string
  postalCode: string
- country: string
  region: string
+ country: string
  contactName: string
  contactTitle: string
  phone: phone
@@ -33,6 +33,24 @@ Customer:
  
 Employee:
  _name: ${firstname} ${lastname}, ${title}
+ titleOfCourtesy: string
+ firstname: string
+ lastname: string
+ birthDate: date
+ hireDate: date
+ title: string
+ address: string
+ city: string
+ postalCode: string
+ region: string
+ country: string
+ phone: phone
+ extension: string
+ mobile: phone
+ email: email
+ mgrId: Employee.entityId
+ photo: https://img.do/northwind/employee/${entityId}.jpg
+ notes: richtext
 
 EmployeeTerritory:
  _name: territoryCode
