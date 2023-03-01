@@ -11,10 +11,25 @@ _constraints: true
 
 Category:
  _name: ${categoryName} - ${description}
+ categoryName: string
+ description: string
+ picture: https://img.do/northwind/${categoryName}.jpg
 
 Customer:
  _name: companyName
  _icon: 
+ companyName: string
+ address: string
+ city: string
+ postalCode: string
+ country: string
+ region: string
+ contactName: string
+ contactTitle: string
+ phone: phone
+ mobile: phone
+ fax: phone
+ email: email
  
 Employee:
  _name: ${firstname} ${lastname}, ${title}
