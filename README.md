@@ -69,16 +69,25 @@ OrderDetail:
  _id: entityId
  _name: ${quantity} ${productId->name}
  entityId: int
- entityId: int
  orderId:   Order
  productId: Product
+ quantity: int
+ unitPrice: currency
+ discount: currency
  
 Product:
  _id: entityId
- _name:      productName
+ _name: productName
  entityId: int
+ productName: string
  categoryId: Category
  supplierId: Supplier
+ unitPrice: currency
+ discontinued: bool
+ reorderLevel: int
+ unitsInStock: int
+ unitsOnOrder: int
+ quantityPerUnit: int
  
 SalesOrder:
  _id: entityId
