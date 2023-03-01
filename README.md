@@ -111,21 +111,39 @@ Shipper:
  _id: entityId
  _name: companyName
  entityId: int
+ companyName: string
+ phone: phone
  
 Supplier:
  _id: entityId
  _name: companyName
  entityId: int
+ companyName: string
+ address: string
+ city: string
+ postalCode: string
+ region: string
+ country: string
+ contactName: string
+ contactTitle: string
+ phone: phone
+ mobile: phone
+ fax: phone
+ email: email
  
 Region:
  _id: entityId
  _name: regiondescription
  entityId: int
+ regiondescription: string
  
 Territory:
  _id: entityId
- regionId: Region
+ _name: territorydescription
  entityId: int
+ regionId: Region
+ territoryCode: string
+ territorydescription: string
 ```
 
 
