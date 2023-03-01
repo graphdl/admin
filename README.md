@@ -1,5 +1,59 @@
 # Dynamic Admin Apps for GraphDL Schemas
 
+
+## Northwind Example
+
+```yaml
+_name:        Northwind
+_seed:        https://json.fyi/northwind.json
+_defaultId:   entityId
+_constraints: true
+
+Category:
+ _name: ${categoryName} - ${description}
+
+Customer:
+ _name: companyName
+ _icon: 
+ 
+Employee:
+ _name: ${firstname} ${lastname}, ${title}
+
+EmployeeTerritory:
+ _name: territoryCode
+ employeeId: Employee
+ territoryCode: Territory.territoryCode
+ 
+OrderDetail:
+ _name: ${quantity} ${productId->name}
+ orderId:   Order
+ productId: Product
+ 
+Product:
+ _name:      productName
+ categoryId: Category
+ supplierId: Supplier
+ 
+SalesOrder:
+ _name: ${date(orderDate)} - ${count(<-OrderDetail)} Items
+ customerId: Customer
+ employeeId: Employee
+ shipperId:  Shipper
+
+Shipper:
+ _name: companyName
+ 
+Supplier:
+ _name: companyName
+ 
+Region:
+ _name: regiondescription
+ 
+Territory:
+ regionId: Region
+```
+
+
 ```yaml
 
 Post:
