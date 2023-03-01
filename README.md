@@ -40,6 +40,29 @@ ToDo:
   completed:  bool
   
 User:
+  _seed:      https://jsonplaceholder.typicode.com/users
+  _id:        id
+  _name:      name
+  name:       string
+  username:   string
+  email:      string
+  address:
+    street:   string
+    suite:    string
+    city:     string
+    zipcode:  string
+    geo:
+      lat:    latitude
+      lng:    longitude
+  phone:      phone
+  website:    domain
+  company:
+    name:     string
+    catchPhrase: string
+    bs:       string
+
+```
+  
   
   
   
