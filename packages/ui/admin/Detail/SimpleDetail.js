@@ -1,7 +1,10 @@
 import { DateField, NumberField, ReferenceField, Show, SimpleShowLayout, TextField } from 'react-admin';
 import { SimpleList } from '../Lists';
 
-export const SimpleDetail = ({graph,noun}) => (
+export const SimpleDetail = ({graph,noun}) => {
+  const { _list, _detail } = noun
+  console.log({_list})
+  return (
   <Show>
     <SimpleShowLayout>
       {Object.entries(noun).map(([name, field]) => {
@@ -26,11 +29,11 @@ export const SimpleDetail = ({graph,noun}) => (
           }
       })}
 
-      {console.log(noun?._detail?.lists)}
 
-      {noun._detail?.lists && noun._detail.lists.map(list => {
-        console.log({name, list})
-        console.log(graph[list])
+
+      {_detail?.lists && _detail.lists.map(list => {
+        console.log({_detail, list})
+        console.log({graph, noun: graph[list]})
         const List = SimpleList({graph, noun: graph[list]})
         return <List key={name} />
       })}
@@ -44,7 +47,7 @@ export const SimpleDetail = ({graph,noun}) => (
       <TextField source="id" /> */}
     </SimpleShowLayout>
   </Show>
-)
+)}
 
 // export const SimpleList = props => {
 //   return <ListGuesser {...props} />
