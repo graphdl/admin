@@ -12,6 +12,8 @@ Category:
  _name: categoryName
  _list:
   exclude: [entityId, picture]
+ _detail:
+  lists: [Product]
  entityId: int
  categoryName: string
  description: string

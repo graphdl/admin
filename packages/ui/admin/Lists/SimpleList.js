@@ -37,7 +37,7 @@ export const SimpleList = ({graph,noun}) => props => {
             const [ refNoun, refProp ] = (typeof(field) === 'string' && field.split('.')) || []
 
             if (refProp) {
-              console.log({refNoun, refProp})
+              // console.log({refNoun, refProp})
               return <ReferenceField key={name} source={name} reference={refNoun} link='show' />
             }
 

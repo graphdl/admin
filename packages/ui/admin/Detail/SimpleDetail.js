@@ -1,4 +1,5 @@
 import { DateField, NumberField, ReferenceField, Show, SimpleShowLayout, TextField } from 'react-admin';
+import { SimpleList } from '../Lists';
 
 export const SimpleDetail = ({graph,noun}) => (
   <Show>
@@ -9,11 +10,9 @@ export const SimpleDetail = ({graph,noun}) => (
               // && !(noun._detail?.fields && !noun._detail?.fields.includes(name))
             ) {
 
-            console.log({name, field})
             const [ refNoun, refProp ] = (typeof(field) === 'string' && field.split('.')) || []
 
             if (refProp) {
-              console.log({refNoun, refProp})
               return <ReferenceField key={name} source={name} reference={refNoun} link='show' />
             }
             switch (field) {
@@ -26,6 +25,16 @@ export const SimpleDetail = ({graph,noun}) => (
             }
           }
       })}
+
+      {console.log(noun?._detail?.lists)}
+
+      {noun._detail?.lists && noun._detail.lists.map(list => {
+        console.log({name, list})
+        console.log(graph[list])
+        const List = SimpleList({graph, noun: graph[list]})
+        return <List key={name} />
+      })}
+
       {/* <ReferenceField source="orderId" reference="orders" />
       <DateField source="discount" />
       <ReferenceField source="entityId" reference="entities" />
