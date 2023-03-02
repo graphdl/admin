@@ -1,0 +1,139 @@
+_name:        Northwind
+_seed:        https://json.fyi/northwind.json
+_defaultId:   entityId
+_constraints: true
+
+Category:
+ _id: entityId
+ _name: ${categoryName} - ${description}
+ entityId: int
+ categoryName: string
+ description: string
+ picture: https://img.do/northwind/${categoryName}.jpg
+
+Customer:
+ _id: entityId
+ _name: companyName
+ entityId: int
+ companyName: string
+ address: string
+ city: string
+ postalCode: string
+ region: string
+ country: string
+ contactName: string
+ contactTitle: string
+ phone: phone
+ mobile: phone
+ fax: phone
+ email: email
+ 
+Employee:
+ _id: entityId
+ _name: ${firstname} ${lastname}, ${title}
+ entityId: int
+ titleOfCourtesy: string
+ firstname: string
+ lastname: string
+ birthDate: date
+ hireDate: date
+ title: string
+ address: string
+ city: string
+ postalCode: string
+ region: string
+ country: string
+ phone: phone
+ extension: string
+ mobile: phone
+ email: email
+ mgrId: Employee.entityId
+ photo: https://img.do/northwind/employee/${entityId}.jpg
+ notes: richtext
+
+EmployeeTerritory:
+ _id: entityId
+ _name: territoryCode
+ entityId: int
+ employeeId: Employee
+ territoryCode: Territory.territoryCode
+ 
+OrderDetail:
+ _id: entityId
+ _name: ${quantity} ${productId->name}
+ entityId: int
+ orderId:   Order
+ productId: Product
+ quantity: int
+ unitPrice: currency
+ discount: currency
+ 
+Product:
+ _id: entityId
+ _name: productName
+ entityId: int
+ productName: string
+ categoryId: Category
+ supplierId: Supplier
+ unitPrice: currency
+ discontinued: bool
+ reorderLevel: int
+ unitsInStock: int
+ unitsOnOrder: int
+ quantityPerUnit: int
+ 
+SalesOrder:
+ _id: entityId
+ _name: ${date(orderDate)} - ${count(<-OrderDetail)} Items
+ entityId: int
+ customerId: Customer
+ employeeId: Employee
+ shipperId:  Shipper
+ orderDate: datetime
+ freight: currency
+ requiredDate: datetime
+ shippedDate: datetime
+ shipName: string
+ shipAddress: string
+ shipCity: string
+ shipPostalCode: string
+ shipRegion: string
+ shipCountry: string
+
+Shipper:
+ _id: entityId
+ _name: companyName
+ entityId: int
+ companyName: string
+ phone: phone
+ 
+Supplier:
+ _id: entityId
+ _name: companyName
+ entityId: int
+ companyName: string
+ address: string
+ city: string
+ postalCode: string
+ region: string
+ country: string
+ contactName: string
+ contactTitle: string
+ phone: phone
+ mobile: phone
+ fax: phone
+ email: email
+ 
+Region:
+ _id: entityId
+ _name: regiondescription
+ entityId: int
+ regiondescription: string
+ 
+Territory:
+ _id: entityId
+ _name: territorydescription
+ entityId: int
+ regionId: Region
+ territoryCode: string
+ territorydescription: string

@@ -1,4 +1,6 @@
-import { Fragment, useState } from 'react'
+import { Children, Fragment, useState } from 'react'
+import { useListContext, useResourceDefinition, useResourceDefinitions } from 'react-admin'
+import { useParams } from 'react-router-dom'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   Bars3BottomLeftIcon,
@@ -36,22 +38,10 @@ export default function Layout(props) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { navigation = defaultNavigation } = props
 
-  console.log(props)
+  const resources = useResourceDefinitions()
 
-  // const { name, seed, defaultId, constraints, ...resources } = props
-  const resources = {
-    Posts: {},
-    Comments: {},
-    ToDos: {},
-    Albums: {},
-    Photos: {},
-    Users: {},
-    // Graphs: {},
-    // Nouns: {},
-    // Verbs: {},
-  }
-
-  const activeResource = window.location.hash.slice(2).split('?')[0].replace('/show','')
+  const params = useParams()
+  const activeResource = params['*']
 
   return (
     <>
@@ -110,25 +100,25 @@ export default function Layout(props) {
                   </div>
                   <div className="mt-5 h-0 flex-1 overflow-y-auto">
                     <nav className="space-y-1 px-2">
-                      {navigation.map((item) => (
+                      {Object.values(resources).map(resource => (
                         <a
-                          key={item.name}
-                          href={item.href}
+                          key={resource.name}
+                          href={`#/` + resource.name}
                           className={classNames(
-                            item.current
+                            activeResource == resource.name
                               ? 'bg-gray-900 text-white'
                               : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                             'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                           )}
                         >
-                          <item.icon
+                          <div
                             className={classNames(
-                              item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
+                              activeResource == resource.name ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
                               'mr-4 flex-shrink-0 h-6 w-6'
                             )}
                             aria-hidden="true"
                           />
-                          {item.name}
+                          {resource.name}
                         </a>
                       ))}
                     </nav>
@@ -155,13 +145,13 @@ export default function Layout(props) {
             </div>
             <div className="flex flex-1 flex-col overflow-y-auto">
               <nav className="flex-1 space-y-1 px-2 py-4">
-                {Object.entries(resources).map(([name, resource]) => (
+                {Object.values(resources).map(resource => (
                   <a
-                    key={name}
-                    href={`#/` + name}
+                    key={resource.name}
+                    href={`#/` + resource.name}
                     // onClick={onMenuClick}
                     className={classNames(
-                      activeResource == name ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      activeResource == resource.name ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                       'group flex items-center px-2 py-2 text-base font-medium rounded-md cursor-pointer'
                     )}
                   >
@@ -172,7 +162,7 @@ export default function Layout(props) {
                       )}
                       aria-hidden="true"
                     />
-                    {name}
+                    {resource.name}
                   </a>
                 ))}
                 {/* {navigation.map((item) => (
