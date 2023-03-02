@@ -30,6 +30,7 @@ Customer:
    - [contactName, phone]
    - [entityId, companyName, city, country, contactName, phone]
    - notes
+  lists: [Orders]
  entityId: int
  companyName: string
  address: string
