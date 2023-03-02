@@ -1,11 +1,17 @@
 _name:        Northwind
 _seed:        https://json.fyi/northwind.json
 _defaultId:   entityId
+_list:
+  exclude: [entityId, picture]
+_detail:
+  columns: 4
 _constraints: true
 
 Category:
  _id: entityId
- _name: ${categoryName} - ${description}
+ _name: categoryName
+ _list:
+  exclude: [entityId, picture]
  entityId: int
  categoryName: string
  description: string
@@ -14,6 +20,8 @@ Category:
 Customer:
  _id: entityId
  _name: companyName
+ _list:
+  fields: [companyName, city, country, contactName, phone]
  entityId: int
  companyName: string
  address: string
@@ -71,6 +79,8 @@ OrderDetail:
 Product:
  _id: entityId
  _name: productName
+ _list:
+  fields: [productName, categoryId, supplierId, unitPrice, discontinued]
  entityId: int
  productName: string
  categoryId: Category
@@ -110,6 +120,8 @@ Shipper:
 Supplier:
  _id: entityId
  _name: companyName
+ _list:
+  fields: [companyName, city, country, contactName, phone]
  entityId: int
  companyName: string
  address: string

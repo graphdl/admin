@@ -4,17 +4,22 @@ import jsonServerProvider from 'ra-data-json-server'
 import Layout from './Layout'
 // import { getDataProvider } from '../providers/JsonDataProvider'
 import dataProvider from './dataProvider'
+import { SimpleList } from './Lists'
 
 // const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com')
 
 const App = ({graph}) => {
 
-  const { _id, _name, _seed, _defaultId, _constraints, ...nouns } = graph
+  const { _id, _name, _seed, _defaultId, _constraints, _list, ...nouns } = graph
+
+  
 
   return (
     <Admin dataProvider={dataProvider} layout={Layout}>
-      {Object.keys(nouns).map(noun => <Resource name={noun} recordRepresentation='title' list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />)}
-      <Resource name='Posts' recordRepresentation='title' list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+      {Object.entries(nouns).map(([name, noun]) => {
+        const List = SimpleList({graph, noun})
+        return <Resource name={name} recordRepresentation={noun._name} list={List} edit={EditGuesser} show={ShowGuesser} />
+      })}
     </Admin>
   )
 }
