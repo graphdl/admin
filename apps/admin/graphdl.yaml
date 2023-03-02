@@ -61,17 +61,17 @@ Employee:
 
 EmployeeTerritory:
  _id: entityId
- _name: territoryCode
+ _name: territoryCode.entityId
  entityId: int
- employeeId: Employee
+ employeeId: Employee.entityId
  territoryCode: Territory.territoryCode
  
 OrderDetail:
  _id: entityId
  _name: ${quantity} ${productId->name}
  entityId: int
- orderId:   Order
- productId: Product
+ orderId:   SalesOrder.entityId
+ productId: Product.entityId
  quantity: int
  unitPrice: currency
  discount: currency
@@ -83,8 +83,8 @@ Product:
   fields: [productName, categoryId, supplierId, unitPrice, discontinued]
  entityId: int
  productName: string
- categoryId: Category
- supplierId: Supplier
+ categoryId: Category.entityId
+ supplierId: Supplier.entityId
  unitPrice: currency
  discontinued: bool
  reorderLevel: int
@@ -96,9 +96,9 @@ SalesOrder:
  _id: entityId
  _name: ${date(orderDate)} - ${count(<-OrderDetail)} Items
  entityId: int
- customerId: Customer
- employeeId: Employee
- shipperId:  Shipper
+ customerId: Customer.entityId
+ employeeId: Employee.entityId
+ shipperId:  Shipper.entityId
  orderDate: datetime
  freight: currency
  requiredDate: datetime
@@ -146,6 +146,6 @@ Territory:
  _id: entityId
  _name: territorydescription
  entityId: int
- regionId: Region
+ regionId: Region.entityId
  territoryCode: string
  territorydescription: string
