@@ -24,6 +24,12 @@ Customer:
  _name: companyName
  _list:
   fields: [companyName, city, country, contactName, phone]
+ _detail:
+  layout: 
+   - [entityId, companyName, city, country]
+   - [contactName, phone]
+   - [entityId, companyName, city, country, contactName, phone]
+   - notes
  entityId: int
  companyName: string
  address: string
