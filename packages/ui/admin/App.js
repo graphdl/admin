@@ -7,11 +7,9 @@ import dataProvider from './dataProvider'
 
 // const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com')
 
-const App = props => {
+const App = ({graph}) => {
 
-  const { _id, _name, _seed, _defaultId, _constraints, ...nouns } = props.graph
-
-  // const dataProvider = props.dataProvider ?? getDataProvider()
+  const { _id, _name, _seed, _defaultId, _constraints, ...nouns } = graph
 
   return (
     <Admin dataProvider={dataProvider} layout={Layout}>
