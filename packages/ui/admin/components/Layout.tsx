@@ -24,7 +24,7 @@ export default function Layout(props: LayoutProps) {
           {sidebarOpen && <MobileSidebar sidebarOpen={sidebarOpen} onClose={toggleSidebar} title={props?.title} />}
         </AnimatePresence>
 
-        <Sidebar  {...props} />
+        <Sidebar  title={props?.title} />
         <div className="flex flex-col lg:pl-64 min-h-screen bg-[#f6f9fc]">
           <Navbar toggleSidebar={toggleSidebar} />
 

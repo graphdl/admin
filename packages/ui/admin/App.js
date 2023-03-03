@@ -12,7 +12,7 @@ import Dashboard from './pages/Dashboard'
 
 const App = ({ graph }) => {
   const { _id, _name, _seed, _detail, _defaultId, _constraints, _list, ...nouns } = graph
-  console.log('graph', graph)
+  console.log('Appgraph', graph)
   
   return (
     <Admin title={_name} dashboard={Dashboard} dataProvider={dataProvider} layout={Layout}>
