@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import yaml from 'yaml'
 import fs from 'fs'
 
+// @ts-ignore
 const App = dynamic(() => import('@graphdl/ui/admin/App'), { ssr: false })
 
 const Home = props => {
