@@ -6,18 +6,21 @@ import Layout from './components/Layout'
 import dataProvider from './dataProvider'
 import { SimpleDetail } from './Detail'
 import { SimpleList } from './Lists'
-import { BrowserRouter, Route } from 'react-router-dom'
+import Dashboard from './pages/Dashboard'
 
 // const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com')
 
 const App = ({ graph }) => {
   const { _id, _name, _seed, _detail, _defaultId, _constraints, _list, ...nouns } = graph
-
+  console.log('graph', graph)
+  
   return (
-    <Admin dataProvider={dataProvider} layout={Layout}>
+    <Admin title={_name} dashboard={Dashboard} dataProvider={dataProvider} layout={Layout}>
       {Object.entries(nouns).map(([name, noun]) => {
         const List = SimpleList({ graph, noun })
         const Detail = SimpleDetail({ graph, noun })
+
+        console.log('noun', noun)
         return (
           <Resource
             key={graph + noun}

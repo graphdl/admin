@@ -1,13 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react'
-import NavMenu from './NavMenu'
 import { Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { motion } from 'framer-motion'
+import NavMenu from './NavMenu'
 
 export function MobileSidebar({ sidebarOpen, onClose }: { sidebarOpen: boolean; onClose: () => void }) {
   return (
-    <Dialog as={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1}} exit={{ opacity: 0 }} className="relative z-40 lg:hidden" open={sidebarOpen} onClose={onClose}>
+    <Dialog
+      as={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="relative z-40 lg:hidden"
+      open={sidebarOpen}
+      onClose={onClose}
+    >
       <div className="fixed inset-0 bg-gray-600 bg-opacity-75" />
 
       <div className="fixed inset-0 z-40 flex">

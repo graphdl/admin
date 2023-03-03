@@ -6,7 +6,6 @@ import Northwind from '../../examples/northwind.json'
 export default function Searchbar() {
   const [search, setSearch] = React.useState<string>('')
 
-
   const { pathname } = useLocation()
   const activeResource = pathname?.split('/')[1]
 
@@ -30,7 +29,7 @@ export default function Searchbar() {
   const source = northwind[activeResource]
 
   function handleSearch(input: string) {
-    const filtered = source.filter((item: any) => {
+    const filtered = source?.filter((item: any) => {
       return Object.entries(item).some((entry: any) => {
         return entry[1]?.toString().toLowerCase().includes(input.toLowerCase())
       })
@@ -41,7 +40,7 @@ export default function Searchbar() {
   }
 
   return (
-    <div className="flex flex-1 pl-4 ">
+    <div className="flex flex-1 pl-4">
       <form className="flex w-full lg:ml-0" action="#" method="GET">
         <label htmlFor="search-field" className="sr-only">
           Search
@@ -52,7 +51,7 @@ export default function Searchbar() {
           </div>
           <input
             id="search-field"
-            className="block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
+            className="bg-inherit block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
             placeholder="Search"
             type="search"
             name="search"

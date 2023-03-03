@@ -1,3 +1,4 @@
+import { Resource } from "react-admin"
 
 
 export const Noun = props => {

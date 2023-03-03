@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { Bars3Icon, BellIcon } from '@heroicons/react/24/outline'
-import { defaultTheme, LoadingIndicator, ToggleThemeButton } from 'react-admin'
 
 import ProfileMenu from './ProfileMenu'
 import Searchbar from './Searchbar'
-
 
 export default function Navbar({ toggleSidebar }: { toggleSidebar: () => void }) {
   return (
@@ -20,8 +18,6 @@ export default function Navbar({ toggleSidebar }: { toggleSidebar: () => void })
       <div className="flex flex-1 justify-between">
         <Searchbar />
         <div className="ml-4 flex items-center lg:ml-6 px-4">
-
-
           <button
             type="button"
             className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
