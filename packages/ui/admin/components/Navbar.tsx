@@ -19,7 +19,7 @@ export default function Navbar({ toggleSidebar }: { toggleSidebar: () => void })
       </button>
       <div className="flex flex-1 justify-between">
         <Searchbar />
-        <div className="ml-4 flex items-center lg:ml-6">
+        <div className="ml-4 flex items-center lg:ml-6 px-4">
 
 
           <button

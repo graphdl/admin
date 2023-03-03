@@ -31,7 +31,7 @@ export default function Layout(props: LayoutProps) {
               <div className="px-4 sm:px-6 lg:px-8">
                 <h1 className="text-2xl font-semibold text-gray-900">{activeResource}</h1>
               </div>
-              <div className="w-full mt-[-3em] overflow-x-auto rounded-[4px]">{props.children}</div>
+              <div className="w-full mt-[1em] overflow-x-auto rounded-[4px]">{props.children}</div>
             </div>
           </main>
         </div>
