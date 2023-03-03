@@ -29,7 +29,7 @@ export const SimpleList = ({graph,noun}) => props => {
 
   return (
     <List filters={filters} hasCreate={true} exporter={false} >
-      <Datagrid rowClick='show' size='medium'  sx={{ '& .RaDatagrid-headerCell': { whiteSpace: 'nowrap' }}}>
+      <Datagrid rowClick='show' bulkActionButtons={false} size='medium'  sx={{ '& .RaDatagrid-headerCell': { whiteSpace: 'nowrap' }}}>
         {Object.entries(noun).map(([name, field]) => {
           if (!name.startsWith('_') && !graph._list?.exclude?.includes(name) && !noun._list?.exclude?.includes(name) &&
             !(noun._list?.fields && !noun._list?.fields.includes(name))) {
