@@ -5,7 +5,7 @@ import fs from 'fs'
 // @ts-ignore
 const App = dynamic(() => import('@graphdl/ui/admin/App'), { ssr: false })
 
-const Home = props => {
+const Home = (props: JSX.IntrinsicAttributes) => {
   return <App {...props} />
 }
 
