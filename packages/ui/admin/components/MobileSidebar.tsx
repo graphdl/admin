@@ -2,9 +2,18 @@
 import { Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { motion } from 'framer-motion'
+import { Link } from 'react-admin'
 import NavMenu from './NavMenu'
 
-export function MobileSidebar({ sidebarOpen, onClose }: { sidebarOpen: boolean; onClose: () => void }) {
+export function MobileSidebar({
+  sidebarOpen,
+  onClose,
+  title,
+}: {
+  sidebarOpen: boolean
+  onClose: () => void
+  title?: string
+}) {
   return (
     <Dialog
       as={motion.div}
@@ -29,17 +38,12 @@ export function MobileSidebar({ sidebarOpen, onClose }: { sidebarOpen: boolean; 
               <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
             </button>
           </div>
-
-          <div className="flex flex-shrink-0 items-center px-4 space-x-4">
-            <img
-              className="h-12 w-auto rounded-full"
-              src="https://res.cloudinary.com/dtram9qiy/image/upload/v1677788279/my-upload/svs7o4htlroeazs2yio4.png"
-              alt="GraphDL"
-            />
-            <span className="text-base text-white font-medium font-mono tracking-wide leading-[110%]">
-              GraphDL Admin
-            </span>
-          </div>
+          <Link to="/" onClick={onClose}>
+            <div className="flex flex-shrink-0 items-center pl-6 px-4 space-x-1">
+              <span className="flex text-sm">■●</span>
+              <span className="text-lg text-white font-medium tracking-wide leading-[110%]">{title}</span>
+            </div>
+          </Link>
           <NavMenu mobile onClose={onClose} />
         </Dialog.Panel>
 

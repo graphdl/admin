@@ -21,7 +21,7 @@ export default function Layout(props: LayoutProps) {
     <>
       <div>
         <AnimatePresence>
-          {sidebarOpen && <MobileSidebar sidebarOpen={sidebarOpen} onClose={toggleSidebar} {...props} />}
+          {sidebarOpen && <MobileSidebar sidebarOpen={sidebarOpen} onClose={toggleSidebar} title={props?.title} />}
         </AnimatePresence>
 
         <Sidebar  {...props} />
