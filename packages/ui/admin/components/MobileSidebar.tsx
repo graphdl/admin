@@ -39,7 +39,7 @@ export function MobileSidebar({
             </button>
           </div>
           <Link to="/" onClick={onClose}>
-            <div className="flex flex-shrink-0 items-center pl-6 px-4 space-x-1">
+            <div className="flex flex-shrink-0 items-center pl-[18px] px-4 space-x-1">
             <span className='h-[15px] w-[15px] bg-white rounded-[3px]' /><span className='h-[15px] w-[15px] bg-white rounded-full' />
               <span className="text-lg text-white font-medium tracking-wide leading-[110%]">{title}</span>
             </div>
