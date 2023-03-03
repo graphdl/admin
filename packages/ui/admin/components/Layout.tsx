@@ -13,17 +13,19 @@ export default function Layout(props: LayoutProps) {
   const params = useParams()
   const activeResource = params['*']
 
+  console.log('props', props)
+
   const toggleSidebar = useCallback(() => setSidebarOpen(!sidebarOpen), [sidebarOpen])
 
   return (
     <>
       <div>
         <AnimatePresence>
-          {sidebarOpen && <MobileSidebar sidebarOpen={sidebarOpen} onClose={toggleSidebar} />}
+          {sidebarOpen && <MobileSidebar sidebarOpen={sidebarOpen} onClose={toggleSidebar} {...props} />}
         </AnimatePresence>
 
-        <Sidebar />
-        <div className="flex flex-col lg:pl-[250px] min-h-screen bg-[#f6f9fc]">
+        <Sidebar  {...props} />
+        <div className="flex flex-col lg:pl-64 min-h-screen bg-[#f6f9fc]">
           <Navbar toggleSidebar={toggleSidebar} />
 
           <main className="flex-1">

@@ -18,7 +18,7 @@ export function MobileSidebar({ sidebarOpen, onClose }: { sidebarOpen: boolean; 
       <div className="fixed inset-0 bg-gray-600 bg-opacity-75" />
 
       <div className="fixed inset-0 z-40 flex">
-        <Dialog.Panel className="relative flex w-full max-w-[250px] flex-1 flex-col bg-gray-800 pt-5 pb-4">
+        <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-gray-800 pt-5 pb-4">
           <div className="absolute top-0 right-0 -mr-12 pt-2">
             <button
               type="button"
@@ -40,7 +40,7 @@ export function MobileSidebar({ sidebarOpen, onClose }: { sidebarOpen: boolean; 
               GraphDL Admin
             </span>
           </div>
-          <NavMenu />
+          <NavMenu mobile onClose={onClose} />
         </Dialog.Panel>
 
         <div className="w-14 flex-shrink-0" aria-hidden="true">

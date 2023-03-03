@@ -3,7 +3,12 @@ import { useLocation } from 'react-router-dom'
 import { classNames } from '../utils/classNames'
 import { humanCase } from '../utils/humanCase'
 
-export default function NavMenu() {
+interface NavMenuProps {
+  onClose?: () => void
+  mobile?: boolean
+}
+
+export default function NavMenu({ onClose, mobile }: NavMenuProps) {
   const resources = useResourceDefinitions()
   const { pathname } = useLocation()
 
@@ -12,6 +17,7 @@ export default function NavMenu() {
       <nav className="flex-1 space-y-1 px-2 py-4">
         {Object.values(resources).map((resource) => (
           <a
+            onClick={mobile ? onClose : undefined}
             key={resource.name}
             href={'#/' + resource.name}
             className={classNames(
