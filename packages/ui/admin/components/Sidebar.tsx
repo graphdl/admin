@@ -14,7 +14,7 @@ export default function Sidebar(props: any) {
               src="https://res.cloudinary.com/dtram9qiy/image/upload/v1677788279/my-upload/svs7o4htlroeazs2yio4.png"
               alt="GraphDL"
             />
-            <span className="text-base text-white font-medium font-mono tracking-wide leading-[110%]">
+            <span className="text-base text-white font-medium tracking-wide leading-[110%]">
               {props.title}
             </span>
           </div>
