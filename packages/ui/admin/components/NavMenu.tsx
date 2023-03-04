@@ -1,7 +1,7 @@
 import { useResourceDefinitions } from 'react-admin'
-import { useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { classNames } from '../utils/classNames'
-import { humanCase } from '../utils/humanCase'
+import { humanCase } from '../utils'
 
 interface NavMenuProps {
   onClose?: () => void
@@ -16,10 +16,10 @@ export default function NavMenu({ onClose, mobile }: NavMenuProps) {
     <div className="flex flex-1 flex-col overflow-y-auto mt-4">
       <nav className="flex-1 space-y-1 px-2 py-4">
         {Object.values(resources).map((resource) => (
-          <a
+          <Link
             onClick={mobile ? onClose : undefined}
             key={resource.name}
-            href={'#/' + resource.name}
+            to={resource.name}
             className={classNames(
               pathname?.split('/')[1] == resource.name
                 ? 'bg-gray-900 text-white'
@@ -35,7 +35,7 @@ export default function NavMenu({ onClose, mobile }: NavMenuProps) {
               aria-hidden="true"
             />
             {humanCase(resource.name)}
-          </a>
+          </Link>
         ))}
       </nav>
     </div>
