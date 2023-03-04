@@ -1,12 +1,13 @@
 import dynamic from 'next/dynamic'
 import yaml from 'yaml'
 import fs from 'fs'
+import { GraphDLProps } from '@graphdl/ui/typings'
 
 // @ts-ignore
 const App = dynamic(() => import('@graphdl/ui/admin/App'), { ssr: false })
 
-const Home = (props: JSX.IntrinsicAttributes) => {
-  return <App {...props} />
+const Home = ({ graph }: { graph: any }) => {
+  return <App graph={graph} />
 }
 
 export async function getStaticProps() {
