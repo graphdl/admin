@@ -1,13 +1,13 @@
 import { Admin, Resource } from 'react-admin'
+import '../styles.css'
 import { Noun } from '../typings'
 import Layout from './components/Layout'
 import Dashboard from './pages/Dashboard'
-import ResourceList from './resourceData/ResourceList'
-import dataProvider from './utils/dataProvider'
-import ResourceShow from './resourceData/ResourceShow'
-import '../styles.css'
 import ResourceCreate from './resourceData/ResourceCreate'
 import { ResourceEdit } from './resourceData/ResourceEdit'
+import ResourceList from './resourceData/ResourceList'
+import ResourceShow from './resourceData/ResourceShow'
+import dataProvider from './utils/dataProvider'
 
 const App = ({ graph }: { graph: any }) => {
   const { _id, _name, _seed, _detail, _defaultId, _constraints, _list, ...nouns } = graph
@@ -15,14 +15,13 @@ const App = ({ graph }: { graph: any }) => {
   return (
     <Admin title={_name} dashboard={Dashboard} dataProvider={dataProvider} layout={Layout}>
       {Object.entries<Noun<string, any>>(nouns).map(([name, noun]) => {
-
         return (
           <Resource
             key={graph + noun}
             name={name}
             list={ResourceList({ graph, noun })}
-            show={ResourceShow({graph, noun})}
-            create={ResourceCreate}
+            show={ResourceShow({ graph, noun })}
+            create={ResourceCreate({ graph, noun })}
             edit={ResourceEdit}
             recordRepresentation={noun?._name}
           />

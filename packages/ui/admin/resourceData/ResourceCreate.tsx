@@ -1,34 +1,60 @@
+import { Box, Card, CardContent } from '@mui/material'
+import * as React from 'react'
+import {
+  Create,
+  TabbedForm,
+  TextInput,
+  required,
+  RichTextField,
+  useResourceContext,
+  useCreate,
+  useCreateContext,
+  useReference,
+  useResourceDefinition,
+  useResourceDefinitions,
+  Form,
+} from 'react-admin'
+import { unstable_HistoryRouter, useLocation, useParams, useSearchParams } from 'react-router-dom'
+import { Noun } from '../../typings'
 
-import * as React from 'react';
-import { Create, TabbedForm, TextInput, required, RichTextField } from 'react-admin';
+const ResourceCreate = ({ graph, noun }: any) => {
+  let nounFields: Noun<string, any> = {}
 
+  if (noun) {
+    nounFields = Object.entries(noun).reduce((acc: Noun<string, any>, [key, value]) => {
+      if (
+        !key.startsWith('_') &&
+        !graph._list?.exclude?.includes(key) &&
+        !noun._list?.exclude?.includes(name) &&
+        !(noun._list?.fields && !noun._list?.fields.includes(key))
+      ) {
+        acc[key] = value
+      }
+      return acc
+    }, {})
+  }
 
-
-
-const ResourceCreate = () => (
+  return (
     <Create>
-        <TabbedForm defaultValues={{ sales: 0 }}>
-            <TabbedForm.Tab
-                label="resources.products.tabs.image"
-                sx={{ maxWidth: '40em' }}
-            >
-                <TextInput
-                    autoFocus
-                    source="image"
-                    fullWidth
-                    validate={required()}
-                />
-                <TextInput source="thumbnail" fullWidth validate={required()} />
-            </TabbedForm.Tab>
-
-            <TabbedForm.Tab
-                label="resources.products.tabs.description"
-                path="description"
-            >
-                <RichTextField source="description" label="" />
-            </TabbedForm.Tab>
-        </TabbedForm>
+      <Form>
+        <Card>
+          <CardContent>
+            {nounFields &&
+              Object?.keys(nounFields).map((item, i) => {
+                return (
+                  <Box key={i} mt={2} maxWidth={800}>
+                    <TextInput source={item} fullWidth />
+                    <Spacer />
+                  </Box>
+                )
+              })}
+          </CardContent>
+        </Card>
+      </Form>
     </Create>
-);
+  )
+}
 
-export default ResourceCreate;
+export default ResourceCreate
+
+const Spacer = () => <Box width={20} component="span" />
