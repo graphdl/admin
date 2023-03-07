@@ -13,6 +13,11 @@ import {
   useResourceDefinition,
   useResourceDefinitions,
   Form,
+  CreateButton,
+  SaveButton,
+  RefreshButton,
+  SimpleForm,
+  DeleteButton,
 } from 'react-admin'
 import { unstable_HistoryRouter, useLocation, useParams, useSearchParams } from 'react-router-dom'
 import { Noun } from '../../typings'
@@ -48,6 +53,7 @@ const ResourceCreate = ({ graph, noun }: any) => {
                   </Box>
                 )
               })}
+            <SaveButton />
           </CardContent>
         </Card>
       </Form>

@@ -1,5 +1,8 @@
 import { Box, Card, CardContent } from '@mui/material'
 import { EditBase, EditButton, Form, ShowButton, TextInput, Toolbar, useEditContext } from 'react-admin'
+import { exclude } from '../utils/exclude'
+
+
 
 export const ResourceEdit = () => (
   <EditBase redirect="show">
@@ -48,12 +51,12 @@ const ResourceEditContent = ({ link = 'show' }) => {
 }
 
 export const ResourceInputs = ({ record }: any) => {
-  console.log('record', typeof record)
+  console.log('record', Object?.keys(record))
   return (
     <div className="flex flex-col w-full">
       <Box flex="1" mt={-1}>
         {record &&
-          Object?.keys(record).map((item, i) => {
+          Object?.keys(record).filter((item) => !exclude?.includes(item)).map((item, i) => {
             return (
               <Box key={i} mt={2} maxWidth={800}>
                 <TextInput source={item} fullWidth />
