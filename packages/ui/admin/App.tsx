@@ -4,9 +4,10 @@ import Layout from './components/Layout'
 import Dashboard from './pages/Dashboard'
 import ResourceList from './resourceData/ResourceList'
 import dataProvider from './utils/dataProvider'
-import { humanCase } from './utils'
 import ResourceShow from './resourceData/ResourceShow'
 import '../styles.css'
+import ResourceCreate from './resourceData/ResourceCreate'
+import { ResourceEdit } from './resourceData/ResourceEdit'
 
 const App = ({ graph }: { graph: any }) => {
   const { _id, _name, _seed, _detail, _defaultId, _constraints, _list, ...nouns } = graph
@@ -14,13 +15,15 @@ const App = ({ graph }: { graph: any }) => {
   return (
     <Admin title={_name} dashboard={Dashboard} dataProvider={dataProvider} layout={Layout}>
       {Object.entries<Noun<string, any>>(nouns).map(([name, noun]) => {
-        console.log('name', name)
+
         return (
           <Resource
             key={graph + noun}
             name={name}
             list={ResourceList({ graph, noun })}
             show={ResourceShow({graph, noun})}
+            create={ResourceCreate}
+            edit={ResourceEdit}
             recordRepresentation={noun?._name}
           />
         )

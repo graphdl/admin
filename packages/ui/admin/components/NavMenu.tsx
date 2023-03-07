@@ -1,7 +1,7 @@
 import { useResourceDefinitions } from 'react-admin'
-import { Link, NavLink, useLocation } from 'react-router-dom'
-import { classNames } from '../utils/classNames'
+import { Link, useLocation } from 'react-router-dom'
 import { humanCase } from '../utils'
+import { classNames } from '../utils/classNames'
 
 interface NavMenuProps {
   onClose?: () => void

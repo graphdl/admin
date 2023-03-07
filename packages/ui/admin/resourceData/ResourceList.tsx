@@ -11,7 +11,6 @@ import {
   UrlField,
 } from 'react-admin'
 import { Noun } from '../../typings'
-import { isDate, isEmail, isUrl } from '../utils'
 
 export default function ResourceList({ graph, noun }: any) {
   let nounFields: Noun<string, any> = {}
@@ -31,18 +30,19 @@ export default function ResourceList({ graph, noun }: any) {
   }
 
   return (
-    <List hasCreate empty={false} perPage={10}>
+    <List hasCreate empty={false} perPage={10} hasList>
       <Datagrid
         sx={{ '& .RaDatagrid-headerCell': { whiteSpace: 'nowrap' } }}
         bulkActionButtons={false}
         rowClick="show"
+        
         size="medium"
       >
         {Object?.entries((nounFields as Noun<string, any>) || {}).map(([key, field], index: number) => {
           const [refNoun, refProp] = (typeof field === 'string' && field.split('.')) || []
-          console.log({ refNoun, refProp })
+
           if (refProp) return <ReferenceField key={index} label={refNoun} source={key} reference={refNoun} link="show" />
-          console.log({ field })
+
           switch (field) {
             case 'string':
               return <TextField key={index} source={key} noWrap />

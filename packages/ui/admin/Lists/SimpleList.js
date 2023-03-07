@@ -42,7 +42,7 @@ export const SimpleList = ({ graph, noun }) => {
             !(noun._list?.fields && !noun._list?.fields.includes(name))
           ) {
             const [refNoun, refProp] = (typeof field === 'string' && field.split('.')) || []
-            console.log('refNount', { refNoun, refProp })
+            console.log('refNoun', { refNoun, refProp })
             if (refProp) {
               console.log('name, field, refNoun, refProp', { name, field, refNoun, refProp })
 
@@ -58,9 +58,9 @@ export const SimpleList = ({ graph, noun }) => {
             }
           }
         })}
-        {/* <ReferenceField source='userId' reference='users' link='show' />
+        {/* <ReferenceField source='userId' reference='product' link='show' />
         <TextField source='id' />
-        <TextField source='title' />
+        <TextField source='Supplier' />
         <TextField source='body' /> */}
       </Datagrid>
     </List>

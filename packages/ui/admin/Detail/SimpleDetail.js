@@ -10,8 +10,8 @@ export const SimpleDetail = ({ graph, noun }) => {
         {Object.entries(noun).map(([name, field]) => {
           if (
             !name.startsWith('_')
-            // && !graph._detail?.exclude?.includes(name) && !noun._detail?.exclude?.includes(name)
-            // && !(noun._detail?.fields && !noun._detail?.fields.includes(name))
+             && !graph._detail?.exclude?.includes(name) && !noun._detail?.exclude?.includes(name)
+             && !(noun._detail?.fields && !noun._detail?.fields.includes(name))
           ) {
             const [refNoun, refProp] = (typeof field === 'string' && field.split('.')) || []
 
@@ -38,8 +38,8 @@ export const SimpleDetail = ({ graph, noun }) => {
               /* console.log({_detail, list})
         console.log({graph, noun: graph[list]}) */
             }
-            const List = SimpleList({ graph, noun: graph[list] })
-            return <List key={name} />
+            
+            return <SimpleList key={name} graph={graph} noun={graph[list]} />
           })}
 
         {/* <ReferenceField source="orderId" reference="orders" />
