@@ -1,21 +1,59 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import {
-  List,
-  Datagrid,
-  ReferenceField,
-  TextField,
-  DateField,
-  NumberField,
-  EmailField,
-  UrlField,
   BooleanField,
+  Datagrid,
+  DateField,
+  EmailField,
+  List,
+  NumberField,
+  ReferenceField,
   RichTextField,
+  TextField,
+  UrlField,
+  useShowContext,
 } from 'react-admin'
+import { useParams } from 'react-router-dom'
 import { Noun } from '../../typings'
+import { humanCase } from '../utils'
+import dataProvider from '../utils/dataProvider'
 
-export default function Sublist({ graph, noun }: { graph: any; noun: any }) {
-  console.log('Sublist', { graph, noun })
+export default function ResourceSublist({ graph, noun }: { graph: any; noun: any }) {
+  const { id } = useParams()
+  const [data, setData] = useState<any[]>([])
+  const { defaultTitle, record } = useShowContext()
   const resource = graph[noun]
+  const targetId = Object.keys(resource).filter(
+    (key) => key?.replace('Id', '') === defaultTitle?.split(' ')[0].toLowerCase(),
+  )
+  const actualTarget = resource[targetId[0]]?.split('.')
+  const actualId = record?.[actualTarget[1]]
+
+  console.log(
+    'resource',
+    resource,
+    targetId,
+    record,
+    // actualTarget,
+    actualId,
+  )
+
+  useEffect(() => {
+    const getSubList = async () => {
+      const products = await dataProvider
+        .getManyReference(noun, {
+          target: targetId[0],
+          id: targetId[0] === 'categoryId' ? id! : actualId,
+          pagination: { page: 1, perPage: 10 },
+          sort: { field: 'id', order: 'ASC' },
+          filter: undefined,
+        })
+        .then((res) => res.data)
+      setData(products)
+    }
+    getSubList()
+  }, [id, noun])
+
+  console.log('datasublist', data)
 
   let nounFields: Noun<string, any> = {}
 
@@ -35,8 +73,8 @@ export default function Sublist({ graph, noun }: { graph: any; noun: any }) {
 
   return (
     <>
-      <div className='pt-10 -mb-14'>
-        <h1 className='text-xl font-medium'>{noun}</h1>
+      <div className="pt-10 -mb-14 mx-4">
+        <h1 className="text-xl font-medium">{humanCase(noun)}</h1>
       </div>
 
       <List hasCreate empty={false} perPage={10} resource={noun} title={noun}>
@@ -45,6 +83,7 @@ export default function Sublist({ graph, noun }: { graph: any; noun: any }) {
           bulkActionButtons={false}
           rowClick="show"
           size="medium"
+          data={data}
         >
           {Object?.entries((nounFields as Noun<string, any>) || {}).map(([key, field], index: number) => {
             const [refNoun, refProp] = (typeof field === 'string' && field.split('.')) || []

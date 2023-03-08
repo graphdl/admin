@@ -683,9 +683,16 @@ select {
   --tw-backdrop-sepia:  ;
 }
 
+@layer components {
+  .headerCell {
+    @apply font-bold text-lg;
+  }
 
+}
 
-
+.RaDatagrid-headerCell {
+  font-size: 30px;
+}
 
 
 /* p > span {

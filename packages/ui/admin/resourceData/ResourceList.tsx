@@ -9,11 +9,13 @@ import {
   RichTextField,
   TextField,
   UrlField,
+  useResourceContext,
 } from 'react-admin'
 import { Noun } from '../../typings'
 
 export default function ResourceList({ graph, noun }: any) {
   let nounFields: Noun<string, any> = {}
+  const resource = useResourceContext()
 
   if (noun) {
     nounFields = Object.entries(noun).reduce((acc: Noun<string, any>, [key, value]) => {
@@ -32,16 +34,17 @@ export default function ResourceList({ graph, noun }: any) {
   return (
     <List hasCreate empty={false} perPage={10} hasList>
       <Datagrid
-        sx={{ '& .RaDatagrid-headerCell': { whiteSpace: 'nowrap' } }}
+        sx={{ '& .RaDatagrid-headerCell': { whiteSpace: 'nowrap', fontWeight: 'bold', fontSize: 16 } }}
         bulkActionButtons={false}
         rowClick="show"
-        
         size="medium"
+        title={resource}
       >
         {Object?.entries((nounFields as Noun<string, any>) || {}).map(([key, field], index: number) => {
           const [refNoun, refProp] = (typeof field === 'string' && field.split('.')) || []
 
-          if (refProp) return <ReferenceField key={index} label={refNoun} source={key} reference={refNoun} link="show" />
+          if (refProp)
+            return <ReferenceField key={index} label={refNoun} source={key} reference={refNoun} link="show" />
 
           switch (field) {
             case 'string':

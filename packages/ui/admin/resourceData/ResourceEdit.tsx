@@ -56,7 +56,7 @@ export const ResourceInputs = ({ record }: any) => {
     <div className="flex flex-col w-full">
       <Box flex="1" mt={-1}>
         {record &&
-          Object?.keys(record).filter((item) => !exclude?.includes(item)).map((item, i) => {
+          Object?.keys(record).filter((item) => item).map((item, i) => {
             return (
               <Box key={i} mt={2} maxWidth={800}>
                 <TextInput source={item} fullWidth />
