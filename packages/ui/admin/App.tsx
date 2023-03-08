@@ -15,12 +15,13 @@ const App = ({ graph }: { graph: any }) => {
   return (
     <Admin title={_name} dashboard={Dashboard} dataProvider={dataProvider} layout={Layout}>
       {Object.entries<Noun<string, any>>(nouns).map(([name, noun]) => {
+
         return (
           <Resource
             key={graph + noun}
             name={name}
             list={ResourceList({ graph, noun })}
-            show={ResourceShow({ graph, noun })}
+            show={ResourceShow({ graph, noun, name })}
             create={ResourceCreate({ graph, noun })}
             edit={ResourceEdit}
             recordRepresentation={noun?._name}

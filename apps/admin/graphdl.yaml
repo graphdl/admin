@@ -1,37 +1,37 @@
 _name:        Northwind
 _seed:        https://json.fyi/northwind.json
-_defaultId:   entityId
+_defaultId:   id
 _list:
-  exclude: [entityId, picture]
+  exclude: [id, picture]
 _detail:
   columns: 4
 _constraints: true
 
 Category:
- _id: entityId
+ _id: id
  _name: categoryName
  _list:
-  exclude: [entityId, picture]
+  exclude: [id, picture]
  _detail:
   lists: [Product]
- entityId: int
+ id: int
  categoryName: string
  description: string
  picture: https://img.do/northwind/${categoryName}.jpg
 
 Customer:
- _id: entityId
+ _id: id
  _name: companyName
  _list:
   fields: [companyName, city, country, contactName, phone]
  _detail:
   layout: 
-   - [entityId, companyName, city, country]
+   - [id, companyName, city, country]
    - [contactName, phone]
-   - [entityId, companyName, city, country, contactName, phone]
+   - [id, companyName, city, country, contactName, phone]
    - notes
   lists: [SalesOrder]
- entityId: int
+ id: int
  companyName: string
  address: string
  city: string
@@ -46,9 +46,9 @@ Customer:
  email: email
  
 Employee:
- _id: entityId
- _name: ${firstname} ${lastname}, ${title}
- entityId: int
+ _id: id
+ _name: title
+ id: int
  titleOfCourtesy: string
  firstname: string
  lastname: string
@@ -64,36 +64,36 @@ Employee:
  extension: string
  mobile: phone
  email: email
- mgrId: Employee.entityId
- photo: https://img.do/northwind/employee/${entityId}.jpg
+ mgrId: Employee.id
+ photo: https://img.do/northwind/employee/${id}.jpg
  notes: richtext
 
 EmployeeTerritory:
- _id: entityId
- _name: territoryCode.entityId
- entityId: int
- employeeId: Employee.entityId
+ _id: id
+ _name: territoryCode.id
+ id: int
+ employeeId: Employee.id
  territoryCode: Territory.territoryCode
  
 OrderDetail:
- _id: entityId
+ _id: id
  _name: ${quantity} ${productId->name}
- entityId: int
- orderId:   SalesOrder.entityId
- productId: Product.entityId
+ id: int
+ orderId:   SalesOrder.id
+ productId: Product.id
  quantity: int
  unitPrice: currency
  discount: currency
  
 Product:
- _id: entityId
+ _id: id
  _name: productName
  _list:
   fields: [productName, categoryId, supplierId, unitPrice, discontinued]
- entityId: int
+ id: int
  productName: string
- categoryId: Category.entityId
- supplierId: Supplier.entityId
+ categoryId: Category.id
+ supplierId: Supplier.id
  unitPrice: currency
  discontinued: bool
  reorderLevel: int
@@ -102,12 +102,12 @@ Product:
  quantityPerUnit: int
  
 SalesOrder:
- _id: entityId
+ _id: id
  _name: ${date(orderDate)} - ${count(<-OrderDetail)} Items
- entityId: int
- customerId: Customer.entityId
- employeeId: Employee.entityId
- shipperId:  Shipper.entityId
+ id: int
+ customerId: Customer.id
+ employeeId: Employee.id
+ shipperId:  Shipper.id
  orderDate: datetime
  freight: currency
  requiredDate: datetime
@@ -120,18 +120,18 @@ SalesOrder:
  shipCountry: string
 
 Shipper:
- _id: entityId
+ _id: id
  _name: companyName
- entityId: int
+ id: int
  companyName: string
  phone: phone
  
 Supplier:
- _id: entityId
+ _id: id
  _name: companyName
  _list:
   fields: [companyName, city, country, contactName, phone]
- entityId: int
+ id: int
  companyName: string
  address: string
  city: string
@@ -146,15 +146,15 @@ Supplier:
  email: email
  
 Region:
- _id: entityId
+ _id: id
  _name: regiondescription
- entityId: int
+ id: int
  regiondescription: string
  
 Territory:
- _id: entityId
+ _id: id
  _name: territorydescription
- entityId: int
- regionId: Region.entityId
+ id: int
+ regionId: Region.id
  territoryCode: string
  territorydescription: string

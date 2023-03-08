@@ -4,34 +4,30 @@ import { Box, Card, CardContent } from '@mui/material'
 import {
   BooleanField,
   DateField,
-  EditButton,
   EmailField,
   NumberField,
   ReferenceField,
   RichTextField,
   Show,
-  ShowBase,
-  ShowButton,
   SimpleShowLayout,
   TextField,
-  UrlField,
-  useResourceContext,
-  useShowContext,
-  useShowController,
+  UrlField
 } from 'react-admin'
 import { Noun } from '../../typings'
 import ResourceSublist from './ResourceSublist'
 
-export default function ResourceShow({ graph, noun, link = 'edit' }: any) {
+export default function ResourceShow({ graph, noun, name: RESOURCE, link = 'edit' }: any) {
   const { _list, _detail } = noun
-  console.log('ResourceShow', { graph, noun })
+  // console.log('ResourceShow', { graph, noun })
 
   let nounFields: Noun<string, any> = {}
 
   if (noun) {
     nounFields = Object.entries(noun).reduce((acc: Noun<string, any>, [key, value]) => {
+      console.log('')
       if (
         !key.startsWith('_') &&
+        key !== 'photo' &&
         !graph._list?.exclude?.includes(key) &&
         !noun._list?.exclude?.includes(name) &&
         !(noun._list?.fields && !noun._list?.fields.includes(key))
@@ -46,21 +42,27 @@ export default function ResourceShow({ graph, noun, link = 'edit' }: any) {
   let midPoint = Math.ceil(fields / 2)
 
   return (
-    <>
+    <div className="mb-8">
       <Show>
         <Card>
           <CardContent>
             <Box display="flex" maxWidth={900} sx={{ display: 'flex' }}>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
-                  <SimpleShowLayout spacing={4}>
+                  <SimpleShowLayout spacing={2}>
                     {Object.entries(nounFields)
                       .slice(0, midPoint)
                       .map(([key, field], index: number) => {
                         const [refNoun, refProp] = (typeof field === 'string' && field.split('.')) || []
+
                         if (refProp) {
+                          const targetName = graph[refNoun]?._name
+                          const targetSource = key === 'mgrId' ? 'Manager' : key
+                          console.log('ResourceList', { key, refNoun, refProp, targetName, targetSource })
                           return (
-                            <ReferenceField key={index} label={refNoun} source={key} reference={refNoun} link="show" />
+                            <ReferenceField key={index} source={key} reference={refNoun} link="show">
+                              <TextField source={targetName} label={targetSource} />
+                            </ReferenceField>
                           )
                         }
                         switch (field) {
@@ -93,14 +95,20 @@ export default function ResourceShow({ graph, noun, link = 'edit' }: any) {
                   </SimpleShowLayout>
                 </Grid>
                 <Grid item xs={6}>
-                  <SimpleShowLayout spacing={4}>
+                  <SimpleShowLayout spacing={2}>
                     {Object.entries(nounFields)
                       .slice(midPoint)
                       .map(([key, field], index) => {
                         const [refNoun, refProp] = (typeof field === 'string' && field.split('.')) || []
+
                         if (refProp) {
+                          const targetName = graph[refNoun]?._name
+                          const targetSource = key === 'mgrId' ? 'Manager' : key
+                          console.log('ResourceList', { key, refNoun, refProp, targetName, targetSource })
                           return (
-                            <ReferenceField key={index} label={refNoun} source={key} reference={refNoun} link="show" />
+                            <ReferenceField key={index} source={key} reference={refNoun} link="show">
+                              <TextField source={targetName} label={targetSource} />
+                            </ReferenceField>
                           )
                         }
                         switch (field) {
@@ -139,8 +147,8 @@ export default function ResourceShow({ graph, noun, link = 'edit' }: any) {
       </Show>
       {_detail?.lists &&
         _detail.lists.map((list: string | number, i: number) => {
-          return <ResourceSublist key={i} graph={graph} noun={list} />
+          return <ResourceSublist key={i} graph={graph} noun={list} resource={RESOURCE} />
         })}
-    </>
+    </div>
   )
 }

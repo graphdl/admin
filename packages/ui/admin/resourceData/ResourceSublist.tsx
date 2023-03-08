@@ -10,39 +10,23 @@ import {
   RichTextField,
   TextField,
   UrlField,
-  useShowContext,
 } from 'react-admin'
 import { useParams } from 'react-router-dom'
 import { Noun } from '../../typings'
 import { humanCase } from '../utils'
 import dataProvider from '../utils/dataProvider'
 
-export default function ResourceSublist({ graph, noun }: { graph: any; noun: any }) {
+export default function ResourceSublist({ graph, noun, resource: SOURCE }: { graph: any; noun: any; resource: any }) {
   const { id } = useParams()
   const [data, setData] = useState<any[]>([])
-  const { defaultTitle, record } = useShowContext()
   const resource = graph[noun]
-  const targetId = Object.keys(resource).filter(
-    (key) => key?.replace('Id', '') === defaultTitle?.split(' ')[0].toLowerCase(),
-  )
-  const actualTarget = resource[targetId[0]]?.split('.')
-  const actualId = record?.[actualTarget[1]]
-
-  console.log(
-    'resource',
-    resource,
-    targetId,
-    record,
-    // actualTarget,
-    actualId,
-  )
 
   useEffect(() => {
     const getSubList = async () => {
       const products = await dataProvider
         .getManyReference(noun, {
-          target: targetId[0],
-          id: targetId[0] === 'categoryId' ? id! : actualId,
+          target: SOURCE.toLowerCase() + 'Id',
+          id: Number(id),
           pagination: { page: 1, perPage: 10 },
           sort: { field: 'id', order: 'ASC' },
           filter: undefined,
@@ -73,17 +57,18 @@ export default function ResourceSublist({ graph, noun }: { graph: any; noun: any
 
   return (
     <>
-      <div className="pt-10 -mb-14 mx-4">
+      <div className="pt-10 -mb-14">
         <h1 className="text-xl font-medium">{humanCase(noun)}</h1>
       </div>
 
-      <List hasCreate empty={false} perPage={10} resource={noun} title={noun}>
+      <List hasCreate empty={false} resource={noun} title={noun}>
         <Datagrid
           sx={{ '& .RaDatagrid-headerCell': { whiteSpace: 'nowrap' } }}
           bulkActionButtons={false}
           rowClick="show"
           size="medium"
           data={data}
+          
         >
           {Object?.entries((nounFields as Noun<string, any>) || {}).map(([key, field], index: number) => {
             const [refNoun, refProp] = (typeof field === 'string' && field.split('.')) || []
@@ -112,7 +97,7 @@ export default function ResourceSublist({ graph, noun }: { graph: any; noun: any
                 return <BooleanField key={index} source={key} />
               case 'richtext':
                 return <RichTextField key={index} source={key} />
-              case 'entityId':
+              case 'id':
                 return <ReferenceField key={index} source={key} reference={refNoun} link="show" />
               default:
                 return <TextField key={index} source={key} noWrap />
