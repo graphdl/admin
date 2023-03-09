@@ -34,7 +34,7 @@ export default function Searchbar() {
         return entry[1]?.toString().toLowerCase().includes(input.toLowerCase())
       })
     })
-    if (filtered.length) {
+    if (filtered?.length) {
       console.log('filtered list', filtered)
     }
   }
@@ -45,13 +45,13 @@ export default function Searchbar() {
         <label htmlFor="search-field" className="sr-only">
           Search
         </label>
-        <div className="relative w-full text-gray-400 focus-within:text-gray-600">
+        <div className="relative w-full text-gray-600 focus-within:text-gray-300">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
             <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
           </div>
           <input
             id="search-field"
-            className="bg-inherit block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
+            className="bg-inherit block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-100 placeholder-gray-300 focus:border-transparent focus:placeholder-gray-600 focus:outline-none focus:ring-0 tracking-wide font-medium"
             placeholder="Search"
             type="search"
             name="search"

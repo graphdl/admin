@@ -26,6 +26,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "framer-motion": "^10.0.1",
     "ra-data-fakerest": "^4.8.1",
+    "ra-data-local-storage": "^4.8.2",
     "react-admin": "^4.8.1",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.8.2",

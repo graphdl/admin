@@ -13,6 +13,7 @@ const Layout: React.FunctionComponent<CoreLayoutProps> = ({ title, children }) =
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const params = useParams()
   const activeResource = params['*']
+  console.log('activeResource', activeResource)
 
   const toggleSidebar = useCallback(() => setSidebarOpen(!sidebarOpen), [sidebarOpen])
 
@@ -24,13 +25,13 @@ const Layout: React.FunctionComponent<CoreLayoutProps> = ({ title, children }) =
         </AnimatePresence>
 
         <Sidebar title={title} />
-        <div className="flex flex-col lg:pl-64 min-h-screen bg-[#f6f9fc]">
+        <div className="flex flex-col lg:pl-64 min-h-screen bg-[#0d1117]">
           <Navbar toggleSidebar={toggleSidebar} />
           <main className="flex-1">
-            <div className="pt-6 px-4 sm:px-6 lg:px-8">
-              <h1 className="text-[22px] font-medium text-gray-900">{humanCase(activeResource!)}</h1>
-              <div className="w-full mt-[1em] overflow-x-auto rounded-[4px]">{children}</div>
-            </div>
+            <h1 className="pt-6 px-5 text-[22px] font-semibold text-gray-300">
+              {humanCase(activeResource! || 'Dashboard')}
+            </h1>
+            <div className="w-full overflow-x-auto rounded-[4px] p-4">{children}</div>
           </main>
         </div>
       </div>

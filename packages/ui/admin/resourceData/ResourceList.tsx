@@ -7,11 +7,28 @@ import {
   NumberField,
   ReferenceField,
   RichTextField,
+  SearchInput,
   TextField,
+  TextInput,
   UrlField,
   useResourceContext,
 } from 'react-admin'
 import { Noun } from '../../typings'
+
+const postFilters = (nounFields: any) => {
+  const filterObject = Object.entries(nounFields).map(([key, field], index) => {
+    return <TextInput key={index} label={key} source={key} />
+  })
+  return filterObject
+}
+
+// const ListToolbar = () => (
+//   <Stack direction="row" justifyContent="space-between">
+//     <div className="flex items-center">
+//       <CreateButton />
+//     </div>
+//   </Stack>
+// )
 
 export default function ResourceList({ graph, noun }: any) {
   let nounFields: Noun<string, any> = {}
@@ -33,7 +50,13 @@ export default function ResourceList({ graph, noun }: any) {
   }
 
   return (
-    <List hasCreate empty={false} perPage={10} hasList>
+    <List
+      hasCreate
+      empty={false}
+      perPage={10}
+      hasList
+      filters={postFilters(nounFields).concat(<SearchInput source="q" alwaysOn={true} autoComplete="off" />)}
+    >
       <Datagrid
         sx={{ '& .RaDatagrid-headerCell': { whiteSpace: 'nowrap', fontWeight: 'bold', fontSize: 15 } }}
         bulkActionButtons={false}
@@ -43,11 +66,11 @@ export default function ResourceList({ graph, noun }: any) {
       >
         {Object?.entries((nounFields as Noun<string, any>) || {}).map(([key, field], index: number) => {
           const [refNoun, refProp] = (typeof field === 'string' && field.split('.')) || []
-          
+
           if (refProp) {
             const targetName = graph[refNoun]?._name
             const targetSource = key === 'mgrId' ? 'Manager' : key
-            console.log('ResourceList', { key, refNoun, refProp, targetName, targetSource })
+
             return (
               <ReferenceField key={index} source={key} reference={refNoun} link="show">
                 <TextField source={targetName} label={targetSource} />
@@ -75,8 +98,6 @@ export default function ResourceList({ graph, noun }: any) {
               return <BooleanField key={index} source={key} />
             case 'richtext':
               return <RichTextField key={index} source={key} />
-            // case 'id':
-            //   return <ReferenceField key={index} source={key} reference={refNoun} link="show" />
             default:
               return <TextField key={index} source={key} noWrap />
           }
@@ -84,23 +105,4 @@ export default function ResourceList({ graph, noun }: any) {
       </Datagrid>
     </List>
   )
-}
-
-export function getRefName(resource: string) {
-  switch (resource) {
-    case 'Employee':
-      return 'title'
-    case 'EmployeeTerritory':
-      return 'territoryCode'
-    case 'OrderDetail':
-      return 'quantity productId'
-    case 'SalesOrder':
-      return 'orderDate'
-  }
-}
-
-export function formatDate(date: string | Date | number | any, options?: any): string {
-  return options
-    ? new Date(date).toLocaleDateString('en-US', options)
-    : new Date(date).toLocaleDateString('en-US', options)
 }

@@ -11,20 +11,18 @@ import {
   Show,
   SimpleShowLayout,
   TextField,
-  UrlField
+  UrlField,
 } from 'react-admin'
 import { Noun } from '../../typings'
 import ResourceSublist from './ResourceSublist'
 
 export default function ResourceShow({ graph, noun, name: RESOURCE, link = 'edit' }: any) {
   const { _list, _detail } = noun
-  // console.log('ResourceShow', { graph, noun })
 
   let nounFields: Noun<string, any> = {}
 
   if (noun) {
     nounFields = Object.entries(noun).reduce((acc: Noun<string, any>, [key, value]) => {
-      console.log('')
       if (
         !key.startsWith('_') &&
         key !== 'photo' &&
@@ -58,7 +56,7 @@ export default function ResourceShow({ graph, noun, name: RESOURCE, link = 'edit
                         if (refProp) {
                           const targetName = graph[refNoun]?._name
                           const targetSource = key === 'mgrId' ? 'Manager' : key
-                          console.log('ResourceList', { key, refNoun, refProp, targetName, targetSource })
+
                           return (
                             <ReferenceField key={index} source={key} reference={refNoun} link="show">
                               <TextField source={targetName} label={targetSource} />
@@ -104,7 +102,7 @@ export default function ResourceShow({ graph, noun, name: RESOURCE, link = 'edit
                         if (refProp) {
                           const targetName = graph[refNoun]?._name
                           const targetSource = key === 'mgrId' ? 'Manager' : key
-                          console.log('ResourceList', { key, refNoun, refProp, targetName, targetSource })
+
                           return (
                             <ReferenceField key={index} source={key} reference={refNoun} link="show">
                               <TextField source={targetName} label={targetSource} />

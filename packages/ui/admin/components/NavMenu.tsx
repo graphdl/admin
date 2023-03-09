@@ -22,7 +22,7 @@ export default function NavMenu({ onClose, mobile }: NavMenuProps) {
             to={resource.name}
             className={classNames(
               pathname?.split('/')[1] == resource.name
-                ? 'bg-gray-900 text-white'
+                ? 'bg-black text-white'
                 : 'text-gray-300 hover:bg-gray-700 hover:text-white ',
               'group flex items-center px-2 py-2 text-base tracking-wide font-medium rounded-[4px] cursor-pointer',
             )}

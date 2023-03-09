@@ -37,7 +37,6 @@ export default function ResourceSublist({ graph, noun, resource: SOURCE }: { gra
     getSubList()
   }, [id, noun])
 
-  console.log('datasublist', data)
 
   let nounFields: Noun<string, any> = {}
 
@@ -68,7 +67,6 @@ export default function ResourceSublist({ graph, noun, resource: SOURCE }: { gra
           rowClick="show"
           size="medium"
           data={data}
-          
         >
           {Object?.entries((nounFields as Noun<string, any>) || {}).map(([key, field], index: number) => {
             const [refNoun, refProp] = (typeof field === 'string' && field.split('.')) || []
