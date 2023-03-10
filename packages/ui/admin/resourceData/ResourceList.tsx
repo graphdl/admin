@@ -55,6 +55,7 @@ export default function ResourceList({ graph, noun }: any) {
       empty={false}
       perPage={10}
       hasList
+      className=''
       filters={postFilters(nounFields).concat(<SearchInput source="q" alwaysOn={true} autoComplete="off" />)}
     >
       <Datagrid

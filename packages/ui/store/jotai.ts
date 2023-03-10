@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 
 export interface Atom<AtomType> {
   get: () => AtomType
@@ -25,7 +25,8 @@ export function atom<AtomType>(initialValue: AtomType | AtomGetter<AtomType>): A
   }
 
   function computeValue() {
-    const newValue = typeof initialValue === 'function' ? (initialValue as AtomGetter<AtomType>)(get) : value
+    const newValue =
+      typeof initialValue === 'function' ? (initialValue as AtomGetter<AtomType>)(get) : value
 
     if (newValue && typeof (newValue as any).then === 'function') {
       value = null as AtomType
@@ -56,11 +57,26 @@ export function atom<AtomType>(initialValue: AtomType | AtomGetter<AtomType>): A
 }
 
 export function useAtom<AtomType>(atom: Atom<AtomType>) {
-  return [useSyncExternalStore(atom.subscribe, atom.get), atom.set] as const
+  const [value, setValue] = useState(atom.get())
+
+  useEffect(() => {
+    const unsubscribe = atom.subscribe(setValue)
+    return () => 
+      unsubscribe()
+  }, [atom])
+
+  return [
+    value,
+    atom.set
+  ]
+}
+
+export function useSetAtom<AtomType>(atom: Atom<AtomType>) {
+  return [atom.set] as const
 }
 
 export function useAtomValue<AtomType>(atom: Atom<AtomType>) {
-  return [useSyncExternalStore(atom.subscribe, atom.get)] as const
+  return [useSyncExternalStore(atom.subscribe, atom.get, atom.get)] as const
 }
 
 export type BoardType = {
@@ -68,9 +84,9 @@ export type BoardType = {
   title: string;
   description: string;
   status: string;
-}[]
+}
 
-export const boardAtom = atom<BoardType>([
+export const boardAtom = atom<any>([
   {
     id: '1',
     title: 'create a Kanban app with Tailwindcss',
