@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { boardAtom, useAtom } from '../../store/jotai'
+import useLocalStorage from './useLocalStorage'
 
 export type Status = 'ideas' | 'backlog' | 'in-progress' | 'done'
 
@@ -10,9 +10,46 @@ interface DragAndDropProps {
   handleUpdateList: (id: string, status: Status) => void
 }
 
+const initalValue = [
+  {
+    id: '1',
+    title: 'create a Kanban app with Tailwindcss',
+    description: 'This will be a Tailwindcss based Kanban app',
+    status: 'ideas',
+  },
+  {
+    id: '2',
+    title: 'master React-Admin',
+    description: 'Embrace MUI and learn how to use it',
+    status: 'backlog',
+  },
+
+  {
+    id: '3',
+    title: 'build a worker in Cloudflare',
+    description: 'Build a service in Cloudflare',
+    status: 'backlog',
+  },
+
+  {
+    id: '4',
+    title: 'building admin dashboard',
+    description: 'React-Admin Tailwindcss Graphdl',
+    status: 'in progress',
+  },
+
+  {
+    id: '5',
+    title: 'ate breakfast',
+    description: '6 eggs yolks and all',
+    status: 'done',
+  },
+]
+
 export default function useDragAndDrop(): DragAndDropProps {
   const [isDragging, setIsDragging] = useState(false)
-  const [listItems, setListItems] = useAtom(boardAtom)
+  const [persisted, setPersisted] = useLocalStorage('kanban-list', initalValue)
+  const [listItems, setListItems] = useState(persisted)
 
   const handleUpdateList = useCallback(
     (id: any, status: Status) => {
@@ -20,10 +57,14 @@ export default function useDragAndDrop(): DragAndDropProps {
       if (card && card.status !== status) {
         card.status = status
 
-        setListItems((prev: any) => [card, ...prev.filter((item: any) => item.id !== id)])
+        setListItems(() => {
+          const newList = [card, ...listItems?.filter((item: any) => item.id !== id)]
+          setPersisted(newList)
+          return newList
+        })
       }
     },
-    [listItems, setListItems],
+    [listItems, setPersisted],
   )
 
   const handleDragging = useCallback((dragging: boolean) => setIsDragging(dragging), [])

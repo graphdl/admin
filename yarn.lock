@@ -2731,6 +2731,13 @@ ra-data-fakerest@^4.8.1:
   dependencies:
     fakerest "^3.0.0"
 
+ra-data-fakerest@^4.8.2:
+  version "4.8.2"
+  resolved "https://registry.yarnpkg.com/ra-data-fakerest/-/ra-data-fakerest-4.8.2.tgz#3c355f16ce07fd65dbf0a11920999def022d88ec"
+  integrity sha512-bhKJG+QEtqsoKpLl/S/XTNyLAJK3TWfksWgUPCsgrG4ir+M5xF7a+hczobvHP/pbVTEpmWxbdey9uh1IMWXDsw==
+  dependencies:
+    fakerest "^3.0.0"
+
 ra-data-json-server@^4.8.1:
   version "4.8.1"
   resolved "https://registry.yarnpkg.com/ra-data-json-server/-/ra-data-json-server-4.8.1.tgz#a4bc44980ade220c9cb61602cf5249c0286f66da"
@@ -2738,6 +2745,14 @@ ra-data-json-server@^4.8.1:
   dependencies:
     query-string "^7.1.1"
     ra-core "^4.8.1"
+
+ra-data-local-storage@^4.8.2:
+  version "4.8.2"
+  resolved "https://registry.yarnpkg.com/ra-data-local-storage/-/ra-data-local-storage-4.8.2.tgz#70e7d84262ea479ed73880b0ea66a7d3082cd906"
+  integrity sha512-Qdn+Cm2Z+3/3ho6RsvB0kOva4CwNNMdcvvH3NJMHtsmgL2VGEZS+alXt4mz+64swbvyYVeUlSVVGVXA0B0/3ZA==
+  dependencies:
+    lodash "~4.17.5"
+    ra-data-fakerest "^4.8.2"
 
 ra-i18n-polyglot@^4.8.1:
   version "4.8.1"
