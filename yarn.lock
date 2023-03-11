@@ -2754,6 +2754,13 @@ ra-data-local-storage@^4.8.2:
     lodash "~4.17.5"
     ra-data-fakerest "^4.8.2"
 
+ra-data-simple-rest@^4.8.2:
+  version "4.8.2"
+  resolved "https://registry.yarnpkg.com/ra-data-simple-rest/-/ra-data-simple-rest-4.8.2.tgz#ea315979aabd500af6262aae76e57020a7446544"
+  integrity sha512-OAu30KT2Pu6jjZj+XL7c6F7fIgBrfdu81YQpaQib5h6C74K8Q5VsNf7hMWZsm9Jzl/zWIWpp/hhYEJ00qun7jA==
+  dependencies:
+    query-string "^7.1.1"
+
 ra-i18n-polyglot@^4.8.1:
   version "4.8.1"
   resolved "https://registry.yarnpkg.com/ra-i18n-polyglot/-/ra-i18n-polyglot-4.8.1.tgz#e721c40bd1edf3150f1561384e8c186092ff493d"

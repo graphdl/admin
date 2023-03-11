@@ -47,6 +47,7 @@ export default function Kanban() {
 
 function KanbanColumn({ status, items, handleDragging, isDragging, handleUpdateList }: KanbanColumnProps) {
   const { handleDragOver, handleDrop } = useDropAndDragOver({ handleDragging, handleUpdateList, status })
+  const count = items?.filter((item) => item.status === status).length || 0
 
   return (
     <div
@@ -60,7 +61,7 @@ function KanbanColumn({ status, items, handleDragging, isDragging, handleUpdateL
         <h1 className="flex items-center gap-x-4 whitespace-nowrap capitalize">
           {status}{' '}
           <span className="text-xs dark:bg-[#161b22] bg-gray-200 text-gray-600 dark:text-[#8b949e] flex items-center justify-center rounded-full h-5 mb-px w-full p-2">
-            {items?.length}
+            {count}
           </span>
         </h1>
       </div>
@@ -136,6 +137,5 @@ function AddIcon() {
     </svg>
   )
 }
-
 
 // TODO Add form to add new item to the list

@@ -14,7 +14,7 @@ import {
 import { useParams } from 'react-router-dom'
 import { Noun } from '../../typings'
 import { humanCase } from '../utils'
-import dataProvider from '../utils/dataProvider'
+import dataProvider from '../utils/fakeDataProvider'
 
 export default function ResourceSublist({ graph, noun, resource: SOURCE }: { graph: any; noun: any; resource: any }) {
   const { id } = useParams()
