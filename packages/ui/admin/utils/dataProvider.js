@@ -1,7 +1,7 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-const apiUrl = 'https://db.mw/';
+const apiUrl = 'https://db.mw';
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {
@@ -9,11 +9,11 @@ const dataProvider = {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const query = {
-            sort: JSON.stringify([field, order]),
-            range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-            filter: JSON.stringify(params.filter),
+            // sort: JSON.stringify([field, order]),
+            // range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+            // filter: JSON.stringify(params.filter),
         };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
+        const url = `${apiUrl}/${resource}`;
 
         const { headers, json } = await httpClient(url)
     return ({
