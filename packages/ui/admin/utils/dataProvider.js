@@ -17,14 +17,14 @@ const dataProvider = {
 
     const { headers, json } = await httpClient(url)
     return {
-      data: json,
-      total: parseInt(headers.get('content-range').split('/').pop(), 10),
+      data: json.data,
+      total: parseInt(headers.get('content-range')?.split('/')?.pop(), 10),
     }
   },
 
   getOne: (resource, params) =>
     httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
-      data: json,
+      data: json.data,
     })),
 
   getMany: async (resource, params) => {
@@ -33,7 +33,7 @@ const dataProvider = {
     }
     const url = `${apiUrl}/${resource}?${stringify(query)}`
     const { json } = await httpClient(url)
-    return { data: json }
+    return { data: json.data, }
   },
 
   getManyReference: async (resource, params) => {
@@ -51,8 +51,8 @@ const dataProvider = {
 
     const { headers, json } = await httpClient(url)
     return {
-      data: json,
-      total: parseInt(headers.get('content-range').split('/').pop(), 10),
+      data: json.data,
+      total: parseInt(headers.get('content-range')?.split('/')?.pop(), 10),
     }
   },
 
@@ -68,7 +68,7 @@ const dataProvider = {
     httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'PUT',
       body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json })),
+    }).then(({ json }) => ({ data: json.data, })),
 
   updateMany: async (resource, params) => {
     const query = {
@@ -78,7 +78,7 @@ const dataProvider = {
       method: 'PUT',
       body: JSON.stringify(params.data),
     })
-    return { data: json }
+    return { data: json.data,}
   },
 
   delete: (resource, params) =>
@@ -94,7 +94,7 @@ const dataProvider = {
       method: 'DELETE',
       body: JSON.stringify(params.data),
     })
-    return { data: json }
+    return { data: json.data, }
   },
 }
 
