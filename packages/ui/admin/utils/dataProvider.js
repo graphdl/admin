@@ -19,7 +19,7 @@ const dataProvider = {
 
     return {
       data: await request.data,
-      total: parseInt(headers?.get('content-range')?.split('/')?.pop(), 10) || request.data.length,
+      total: request.data.length,
     }
   },
 
