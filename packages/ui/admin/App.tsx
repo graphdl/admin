@@ -1,4 +1,6 @@
 import { Admin, Resource } from 'react-admin'
+import { QueryClient } from 'react-query'
+import dataProvider from '../providers/dataProvider'
 import '../styles.css'
 import { Noun } from '../typings'
 import Layout from './components/Layout'
@@ -7,17 +9,24 @@ import ResourceCreate from './resourceData/ResourceCreate'
 import { ResourceEdit } from './resourceData/ResourceEdit'
 import ResourceList from './resourceData/ResourceList'
 import ResourceShow from './resourceData/ResourceShow'
-import dataProvider from './utils/dataProvider'
 
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+})
 
 const App = ({ graph }: { graph: any }) => {
   const { _id, _name, _seed, _detail, _defaultId, _constraints, _list, ...nouns } = graph
 
   return (
-    <Admin title={_name} dashboard={Dashboard} dataProvider={dataProvider} layout={Layout}>
+    <Admin queryClient={queryClient} title={_name} dashboard={Dashboard} dataProvider={dataProvider} layout={Layout}>
       {Object.entries<Noun<string, any>>(nouns).map(([name, noun]) => {
-        console.log('name', name, 'noun', noun)
+        // console.log('name', name, 'noun', noun)
         return (
           <Resource
             key={graph + noun}
