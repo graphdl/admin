@@ -35,7 +35,7 @@ export default function ResourceSublist({ graph, noun, resource: SOURCE }: { gra
       setData(products)
     }
     getSubList()
-  }, [id, noun])
+  }, [SOURCE, id, noun])
 
 
   let nounFields: Noun<string, any> = {}
@@ -54,6 +54,7 @@ export default function ResourceSublist({ graph, noun, resource: SOURCE }: { gra
     }, {})
   }
 
+  console.log('data sublists', data)
   return (
     <>
       <div className="pt-10 -mb-14">
