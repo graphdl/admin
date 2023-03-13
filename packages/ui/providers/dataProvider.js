@@ -33,12 +33,14 @@ export default {
       filter: JSON.stringify({ id: params.ids }),
     }
 
-    const url = `${apiUrl}${resource}?${stringify(query)}&expand=true`
-    const { json } = await httpClient(url)
-    const records = Object.entries(json.data).map(([key, value]) => {
+    const data = await Promise.all(
+      params?.ids?.map(async (id) => await httpClient(`${apiUrl}${resource}/${id}`).then(({ json }) => json.data)),
+    )
+
+    const records = Object.entries(data).map(([key, value]) => {
       return { id: value['entityId'], ...value }
     })
-    console.log('getMany', records)
+    console.log('getMany data', data)
     return { data: records }
   },
   getManyReference: async (resource, params) => {

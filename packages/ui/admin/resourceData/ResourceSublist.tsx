@@ -54,7 +54,7 @@ export default function ResourceSublist({ graph, noun, resource: SOURCE }: { gra
     }, {})
   }
 
-  console.log('data sublists', data)
+ 
   return (
     <>
       <div className="pt-10 -mb-14">
@@ -71,7 +71,7 @@ export default function ResourceSublist({ graph, noun, resource: SOURCE }: { gra
         >
           {Object?.entries((nounFields as Noun<string, any>) || {}).map(([key, field], index: number) => {
             const [refNoun, refProp] = (typeof field === 'string' && field.split('.')) || []
-
+            console.log('hey here you go',refProp, refNoun, key)
             if (refProp)
               return <ReferenceField key={index} label={refNoun} source={key} reference={refNoun} link="show" />
 
