@@ -2,6 +2,7 @@ import { useResourceDefinitions } from 'react-admin'
 import { Link, useLocation } from 'react-router-dom'
 import { humanCase } from '../utils'
 import { classNames } from '../utils/classNames'
+import { MappedIcons } from './MappedIcons'
 
 interface NavMenuProps {
   onClose?: () => void
@@ -30,10 +31,11 @@ export default function NavMenu({ onClose, mobile }: NavMenuProps) {
             <div
               className={classNames(
                 resource ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
-                'mr-4 flex-shrink-0 h-6 w-6 ',
+                'flex-shrink-0 h-6 w-6 ',
               )}
               aria-hidden="true"
             />
+            <MappedIcons name={resource.name} size={12} className="mr-4 h-4 w-4 flex-shrink-0" />
             {humanCase(resource.name)}
           </Link>
         ))}

@@ -63,6 +63,7 @@ export default {
       total: json.totalDocuments,
     }
   },
+  // TODO Create works but the id is not being created on the backend
   create: async (resource, params) => {
     const { data } = params
     const { json } = await httpClient(`${apiUrl}${resource}`, {
