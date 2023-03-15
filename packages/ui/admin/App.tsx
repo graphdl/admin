@@ -33,7 +33,7 @@ const App = ({ graph }: { graph: any }) => {
             name={name}
             list={ResourceList({ graph, noun })}
             show={ResourceShow({ graph, noun, name })}
-            create={ResourceCreate({ graph, noun })}
+            create={ResourceCreate({ graph, noun, name })}
             edit={ResourceEdit}
             recordRepresentation={noun?._name}
           />

@@ -3,7 +3,7 @@ import { stringify } from 'querystring'
 
 /* eslint-disable import/no-anonymous-default-export */
 // 'https://admin.graphdl.org/'
-const apiUrl = 'https://admin.graphdl.org/'
+const apiUrl = 'https://saas.graphdl.org/'
 const httpClient = fetchUtils.fetchJson
 
 export default {
@@ -17,14 +17,14 @@ export default {
     const records = Object.entries(json.data).map(([key, value]) => {
       return { id: value['entityId'], ...value }
     })
-    console.log('records', records)
+    // console.log('records', records)
     return {
       data: records,
       total: json.totalDocuments,
     }
   },
   getOne: async (resource, params) => {
-    console.log('params', params)
+    // console.log('params', params)
     const record = await httpClient(`${apiUrl}${resource}/${params.id}`)
     return { data: { id: record.json.data.entityId, ...record.json.data } }
   },
@@ -40,7 +40,7 @@ export default {
     const records = Object.entries(data).map(([key, value]) => {
       return { id: value['entityId'], ...value }
     })
-    console.log('getMany data', data)
+    // console.log('getMany data', data)
     return { data: records }
   },
   getManyReference: async (resource, params) => {
@@ -70,10 +70,12 @@ export default {
       method: 'POST',
       body: JSON.stringify(data),
     })
+    console.log('json', json)
     return { data: { id: json.data.entityId, ...json.data } }
   },
   update: async (resource, params) => {
     const { data } = params
+    console.log('params', {params, resource})
     const { json } = await httpClient(`${apiUrl}${resource}/${params.id}`, {
       method: 'PUT',
       body: JSON.stringify(data),

@@ -1,29 +1,36 @@
 import { Box, Card, CardContent } from '@mui/material'
-import * as React from 'react'
+import { useEffect, useState } from 'react'
 import {
   Create,
-  TabbedForm,
-  TextInput,
-  required,
-  RichTextField,
-  useResourceContext,
-  useCreate,
-  useCreateContext,
-  useReference,
-  useResourceDefinition,
-  useResourceDefinitions,
   Form,
-  CreateButton,
+  NumberInput,
   SaveButton,
-  RefreshButton,
-  SimpleForm,
-  DeleteButton,
+  TextField,
+  TextInput,
+  useCreateContext,
+  useGetList,
+  useResourceContext,
 } from 'react-admin'
-import { unstable_HistoryRouter, useLocation, useParams, useSearchParams } from 'react-router-dom'
+import dataProvider from '../../providers/dataProvider'
 import { Noun } from '../../typings'
 
-const ResourceCreate = ({ graph, noun }: any) => {
+const ResourceCreate = ({ graph, noun, name }: any) => {
   let nounFields: Noun<string, any> = {}
+  const [entityId, setEntityId] = useState<string>('')
+  const resource = window.location.href.split('/')[4]
+  console.log('resource', resource)
+
+  useEffect(() => {
+    const getTotalRecords = async () => {
+      const { data, total } = await dataProvider.getList(resource, {
+        pagination: { page: 1, perPage: 1 },
+        sort: { field: 'id', order: 'ASC' },
+        filter: {},
+      })
+      setEntityId(total + 1)
+    }
+    getTotalRecords()
+  }, [resource])
 
   if (noun) {
     nounFields = Object.entries(noun).reduce((acc: Noun<string, any>, [key, value]) => {
@@ -53,6 +60,9 @@ const ResourceCreate = ({ graph, noun }: any) => {
                   </Box>
                 )
               })}
+            {/* {entityId && (
+              <TextInput sx={{ display: 'none' }} resource={resource} defaultValue={entityId} source="entityId" />
+            )} */}
             <SaveButton />
           </CardContent>
         </Card>
