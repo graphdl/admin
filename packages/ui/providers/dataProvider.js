@@ -3,7 +3,7 @@ import { stringify } from 'querystring'
 
 /* eslint-disable import/no-anonymous-default-export */
 // 'https://admin.graphdl.org/'
-const apiUrl = 'https://admin.graphdl.org/'
+const apiUrl = 'https://saas.graphdl.org/'
 const httpClient = fetchUtils.fetchJson
 
 export default {
