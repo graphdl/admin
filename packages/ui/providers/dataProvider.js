@@ -3,7 +3,7 @@ import { stringify } from 'querystring'
 
 /* eslint-disable import/no-anonymous-default-export */
 // 'https://admin.graphdl.org/'
-const apiUrl = 'https://saas.graphdl.org/'
+const apiUrl = '/'
 const httpClient = fetchUtils.fetchJson
 
 export default {
@@ -25,7 +25,7 @@ export default {
   },
   getOne: async (resource, params) => {
     // console.log('params', params)
-    const record = await httpClient(`${apiUrl}${resource}/${params.id}`)
+    const record = await httpClient(`${apiUrl}${resource}/${params.id}?expand=true`)
     return { data: { id: record.json.data.entityId, ...record.json.data } }
   },
   getMany: async (resource, params) => {
