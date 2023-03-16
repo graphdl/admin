@@ -14,7 +14,7 @@ export async function getStaticProps() {
   const graph = yaml.parse(fs.readFileSync('graphdl.yaml', 'utf8'))
 
   console.log('Im running on the server')
-  return { props: { graph } }
+  return { props: { graph: sass } }
 }
 
 export default Home
