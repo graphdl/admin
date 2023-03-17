@@ -1,43 +1,42 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useTransition } from 'react'
 import { useLocation } from 'react-router-dom'
 import Northwind from '../../examples/northwind.json'
+import { debounce } from '@mui/material'
 
 export default function Searchbar() {
-  const [search, setSearch] = React.useState<string>('')
+  const [query, setQuery] = React.useState('')
+  const [isLoading, setLoading] = useState(false)
+  const [results, setResults] = React.useState([])
+  const inputRef = React.useRef<any>(null)
+  const location = useLocation()
+
+  console.log('location', location)
 
   const { pathname } = useLocation()
   const activeResource = pathname?.split('/')[1]
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value)
-  }
+  useEffect(() => {
+    setResults([])
+    setQuery('')
+  }, [location.pathname])
 
   useEffect(() => {
-    if (search) {
-      handleSearch(search)
-    } else {
-      // clearSearch()
+    const searchDb = debounce(async () => {
+      try {
+        setLoading(true)
+        const request = await fetch('/search?q=' + query).then((res) => res.json())
+        setResults(request?.data)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
+    }, 500)
+    if (query.trim().length > 0) {
+      searchDb()
     }
-  })
-
-  type Resource<K extends keyof any, T> = {
-    [P in K]: T[]
-  }
-
-  const northwind: Resource<string, any> = Northwind
-  const source = northwind[activeResource]
-
-  function handleSearch(input: string) {
-    const filtered = source?.filter((item: any) => {
-      return Object.entries(item).some((entry: any) => {
-        return entry[1]?.toString().toLowerCase().includes(input.toLowerCase())
-      })
-    })
-    if (filtered?.length) {
-      console.log('filtered list', filtered)
-    }
-  }
+  }, [query])
 
   return (
     <div className="flex flex-1 pl-4">
@@ -53,10 +52,12 @@ export default function Searchbar() {
             id="search-field"
             className="bg-inherit block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-100 placeholder-gray-300 focus:border-transparent focus:placeholder-gray-600 focus:outline-none focus:ring-0 tracking-wide font-medium"
             placeholder="Search"
+            autoComplete="off"
             type="search"
             name="search"
-            value={search}
-            onChange={handleChange}
+            value={query}
+            ref={inputRef}
+            onChange={(e) => setQuery(e.target.value)}
           />
         </div>
       </form>

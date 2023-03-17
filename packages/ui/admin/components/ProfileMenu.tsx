@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/no-img-element */
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
 import { classNames } from '../utils/classNames'
 
 const userNavigation = [
