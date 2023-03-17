@@ -1,23 +1,13 @@
 import { Box, Card, CardContent } from '@mui/material'
 import { useEffect, useState } from 'react'
-import {
-  Create,
-  Form,
-  NumberInput,
-  SaveButton,
-  TextField,
-  TextInput,
-  useCreateContext,
-  useGetList,
-  useResourceContext,
-} from 'react-admin'
+import { Create, Form, SaveButton, TextInput } from 'react-admin'
+import { Noun } from '../AdminApp'
 import dataProvider from '../providers/dataProvider'
-import { Noun } from '../../typings'
 
 const ResourceCreate = ({ graph, noun, name }: any) => {
   let nounFields: Noun<string, any> = {}
   const [entityId, setEntityId] = useState<string>('')
-  const resource = window.location.href.split('/')[4]
+  const resource = window.location.href.split('/')[5]
   console.log('resource', resource)
 
   useEffect(() => {

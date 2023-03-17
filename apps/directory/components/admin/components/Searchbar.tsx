@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import Northwind from '../../examples/northwind.json'
+// import Northwind from '../../examples/northwind.json'
 
 export default function Searchbar() {
   const [search, setSearch] = React.useState<string>('')
@@ -13,31 +13,31 @@ export default function Searchbar() {
     setSearch(e.target.value)
   }
 
-  useEffect(() => {
-    if (search) {
-      handleSearch(search)
-    } else {
-      // clearSearch()
-    }
-  })
+  // useEffect(() => {
+  //   if (search) {
+  //     handleSearch(search)
+  //   } else {
+  //     // clearSearch()
+  //   }
+  // })
 
   type Resource<K extends keyof any, T> = {
     [P in K]: T[]
   }
 
-  const northwind: Resource<string, any> = Northwind
-  const source = northwind[activeResource]
+  // const northwind: Resource<string, any> = Northwind
+  // const source = northwind[activeResource]
 
-  function handleSearch(input: string) {
-    const filtered = source?.filter((item: any) => {
-      return Object.entries(item).some((entry: any) => {
-        return entry[1]?.toString().toLowerCase().includes(input.toLowerCase())
-      })
-    })
-    if (filtered?.length) {
-      console.log('filtered list', filtered)
-    }
-  }
+  // function handleSearch(input: string) {
+  //   const filtered = source?.filter((item: any) => {
+  //     return Object.entries(item).some((entry: any) => {
+  //       return entry[1]?.toString().toLowerCase().includes(input.toLowerCase())
+  //     })
+  //   })
+  //   if (filtered?.length) {
+  //     console.log('filtered list', filtered)
+  //   }
+  // }
 
   return (
     <div className="flex flex-1 pl-4">

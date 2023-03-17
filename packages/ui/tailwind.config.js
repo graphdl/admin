@@ -1,15 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   important: true,
+  purge: {
+    enabled: process.env.NODE_ENV === 'publish',
+    content: ['./admin/**/*.{js,jsx,ts,tsx}']
+  },
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './app/**/*.{js,ts,jsx,tsx}',
-    './pages/*.{js,ts,jsx,tsx}',
-    './components/*.{js,ts,jsx,tsx}',
-    './app/*.{js,ts,jsx,tsx}',
+    './admin/pages/**/*.{js,ts,jsx,tsx}',
+    './admin/components/**/*.{js,ts,jsx,tsx}',
+    './admin/**/*.{js,ts,jsx,tsx}',
+    './admin/resourceData/*.{js,ts,jsx,tsx}',
   ],
-  // darkMode: 'class',
   theme: {
     extend: {},
   },

@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/no-img-element */
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
 import { classNames } from '../utils/classNames'
 
 const userNavigation = [
@@ -24,7 +23,7 @@ export default function ProfileMenu() {
         </Menu.Button>
       </div>
       <Transition
-        as='div'
+        as="div"
         enter="transition ease-out duration-100"
         enterFrom="transform opacity-0 scale-95"
         enterTo="transform opacity-100 scale-100"
@@ -38,7 +37,10 @@ export default function ProfileMenu() {
               {({ active }) => (
                 <a
                   href={item.href}
-                  className={classNames(active ? 'text-gray-300 hover:bg-gray-700 hover:text-white' : '', 'block px-4 py-2 text-sm text-gray-300')}
+                  className={classNames(
+                    active ? 'text-gray-300 hover:bg-gray-700 hover:text-white' : '',
+                    'block px-4 py-2 text-sm text-gray-300',
+                  )}
                 >
                   {item.name}
                 </a>
